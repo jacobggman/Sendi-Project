@@ -6,6 +6,7 @@ using System.Text; //Encoding
 using System.IO;
 using System.Media;
 using System.Collections.Generic;
+using System.Resources;
 
 internal class CircularButton : Button
 {
@@ -145,7 +146,9 @@ internal class MyForm : Form
 
         //tmuna
         pb = new PictureBox();
-        pb.ImageLocation = "C:\\Users\\משתמש\\source\\repos\\WindowsFormsApp10\\WindowsFormsApp10\\cats.jpg";
+        var bitmap = WindowsFormsApp10.Properties.Resources.cats.GetHbitmap();
+        pb.Image = Image.FromHbitmap(bitmap);
+        // pb.ImageLocation = "C:\\Users\\משתמש\\source\\repos\\WindowsFormsApp10\\WindowsFormsApp10\\cats.jpg";
         pb.Location = new System.Drawing.Point(0, 0);
         pb.Size = new System.Drawing.Size(640, 600);
         pb.SizeMode = PictureBoxSizeMode.Zoom;
@@ -215,7 +218,9 @@ internal class MyForm : Form
         form3.BackColor = Color.FromArgb(255, 215, 0);//form color
         form3.FormBorderStyle = FormBorderStyle.Fixed3D;
         form3.Show();
-        form3.BackgroundImage = Image.FromFile("C:\\Users\\משתמש\\source\\repos\\WindowsFormsApp10\\WindowsFormsApp10\\backround3.jpg");
+
+        var bitmap = WindowsFormsApp10.Properties.Resources.backround3.GetHbitmap();
+        form3.BackgroundImage = Image.FromHbitmap(bitmap);
 
         //label
         lb = new Label();
@@ -302,7 +307,8 @@ internal class MyForm : Form
         MoreItems.BackColor = Color.FromArgb(255, 215, 0);//form color
         MoreItems.FormBorderStyle = FormBorderStyle.Fixed3D;
         MoreItems.Show();
-        MoreItems.BackgroundImage = Image.FromFile("C:\\Users\\משתמש\\source\\repos\\WindowsFormsApp10\\WindowsFormsApp10\\backround2.png");
+        var bitmap = WindowsFormsApp10.Properties.Resources.backround2.GetHbitmap();
+        MoreItems.BackgroundImage = Image.FromHbitmap(bitmap);
 
         //label
         lb = new Label();
@@ -453,7 +459,7 @@ internal class MyForm : Form
 
     private void btn5_Click(object sender, EventArgs e)
     {
-        SoundPlayer splayer = new SoundPlayer("C:\\Users\\משתמש\\source\\repos\\WindowsFormsApp10\\WindowsFormsApp10\\song.wav");
+        SoundPlayer splayer = new SoundPlayer(WindowsFormsApp10.Properties.Resources.song);
         splayer.Play();
     }
 
@@ -478,7 +484,8 @@ internal class MyForm : Form
         MoreItems.BackColor = Color.FromArgb(255, 215, 0);//form color
         MoreItems.FormBorderStyle = FormBorderStyle.Fixed3D;
         MoreItems.Show();
-        MoreItems.BackgroundImage = Image.FromFile("C:\\Users\\משתמש\\source\\repos\\WindowsFormsApp10\\WindowsFormsApp10\\employees.jpg");
+        var bitmap = WindowsFormsApp10.Properties.Resources.employees.GetHbitmap();
+        MoreItems.BackgroundImage = Image.FromHbitmap(bitmap);
 
         //button
         btn = new CircularButton();
@@ -533,7 +540,8 @@ internal class MyForm : Form
         MoreItems.BackColor = Color.FromArgb(255, 215, 0);//form color
         MoreItems.FormBorderStyle = FormBorderStyle.Fixed3D;
         MoreItems.Show();
-        MoreItems.BackgroundImage = Image.FromFile("C:\\Users\\משתמש\\source\\repos\\WindowsFormsApp10\\WindowsFormsApp10\\employees.jpg");
+        var bitmap = WindowsFormsApp10.Properties.Resources.employees.GetHbitmap();
+        MoreItems.BackgroundImage = Image.FromHbitmap(bitmap);
 
         //button
         btn = new CircularButton();
