@@ -130,7 +130,7 @@ internal class MyForm : Form
         btn5.FlatAppearance.BorderColor = Color.Blue;
         btn5.FlatAppearance.BorderSize = 0;
         Controls.Add(btn5);
-        btn5.Click += new EventHandler(btn5_Click);
+        btn5.Click += new EventHandler(btn6_Click);
 
         btn8 = new CircularButton();
         btn8.Size = new Size(80, 80);
@@ -148,7 +148,6 @@ internal class MyForm : Form
         pb = new PictureBox();
         var bitmap = WindowsFormsApp10.Properties.Resources.cats.GetHbitmap();
         pb.Image = Image.FromHbitmap(bitmap);
-        // pb.ImageLocation = "C:\\Users\\משתמש\\source\\repos\\WindowsFormsApp10\\WindowsFormsApp10\\cats.jpg";
         pb.Location = new System.Drawing.Point(0, 0);
         pb.Size = new System.Drawing.Size(640, 600);
         pb.SizeMode = PictureBoxSizeMode.Zoom;
@@ -184,21 +183,22 @@ internal class MyForm : Form
 
     private void Workers(object sender, EventArgs e)
     {
-        TextReader tr = new StreamReader("C:\\Users\\משתמש\\source\\repos\\WindowsFormsApp10\\WindowsFormsApp10\\workers.txt");
-        string s;
-        string abc = "";
-        while ((s = tr.ReadLine()) != null)
+        using (TextReader tr = new StreamReader(AppDomain.CurrentDomain.BaseDirectory + "workers.txt"))
         {
-            abc += s + '\n';
+            string s;
+            string abc = "";
+            while ((s = tr.ReadLine()) != null)
+            {
+                abc += s + '\n';
+            }
+            MessageBox.Show(abc);
         }
-        tr.Close();
-        MessageBox.Show(abc);
     }
 
     // Managers
     private void Managers(object sender, EventArgs e)
     {
-        TextReader tr = new StreamReader("C:\\Users\\משתמש\\source\\repos\\WindowsFormsApp10\\WindowsFormsApp10\\manager.txt");
+        TextReader tr = new StreamReader(AppDomain.CurrentDomain.BaseDirectory + "manager.txt");
         string s;
         string abc = "";
         while ((s = tr.ReadLine()) != null)
@@ -247,7 +247,7 @@ internal class MyForm : Form
 
         void btnIdShow_Click(object sender4, EventArgs e4)
         {
-            TextReader tr = new StreamReader("C:\\Users\\משתמש\\source\\repos\\WindowsFormsApp10\\WindowsFormsApp10\\workersID.txt");
+            TextReader tr = new StreamReader(AppDomain.CurrentDomain.BaseDirectory + "workersID.txt");
             string x;
             string abc = "";
             while ((x = tr.ReadLine()) != null)
@@ -274,7 +274,7 @@ internal class MyForm : Form
 
         void btnIdShow1_Click(object sender4, EventArgs e4)
         {
-            TextReader tr = new StreamReader("C:\\Users\\משתמש\\source\\repos\\WindowsFormsApp10\\WindowsFormsApp10\\‏‏managerID.txt");
+            TextReader tr = new StreamReader(AppDomain.CurrentDomain.BaseDirectory + "‏‏managerID.txt");
             string x;
             string abc = "";
             while ((x = tr.ReadLine()) != null)
@@ -334,7 +334,7 @@ internal class MyForm : Form
         windInstruments.Click += new EventHandler(btnwindInstrumentsShow_Click);
         void btnwindInstrumentsShow_Click(object sender4, EventArgs e4)
         {
-            TextReader th = new StreamReader("C:\\Users\\משתמש\\source\\repos\\WindowsFormsApp10\\WindowsFormsApp10\\windInstruments.txt");
+            TextReader th = new StreamReader(AppDomain.CurrentDomain.BaseDirectory + "windInstruments.txt");
             string x;
             string abc = "";
             while ((x = th.ReadLine()) != null)
@@ -360,7 +360,7 @@ internal class MyForm : Form
         percussions.Click += new EventHandler(btnpercussionsShow_Click);
         void btnpercussionsShow_Click(object sender4, EventArgs e4)
         {
-            TextReader tr = new StreamReader("C:\\Users\\משתמש\\source\\repos\\WindowsFormsApp10\\WindowsFormsApp10\\percussions.txt");
+            TextReader tr = new StreamReader(AppDomain.CurrentDomain.BaseDirectory + "percussions.txt");
             string x;
             string abc = "";
             while ((x = tr.ReadLine()) != null)
@@ -381,8 +381,8 @@ internal class MyForm : Form
     // button1 event
     private void btn_Click(object sender, EventArgs e)
     {
-        TextReader T = new StreamReader("C:\\Users\\משתמש\\source\\repos\\WindowsFormsApp10\\WindowsFormsApp10\\sendi1.txt");
-        TextReader F = new StreamReader("C:\\Users\\משתמש\\source\\repos\\WindowsFormsApp10\\WindowsFormsApp10\\sendi2.txt");
+        TextReader T = new StreamReader(AppDomain.CurrentDomain.BaseDirectory + "sendi1.txt");
+        TextReader F = new StreamReader(AppDomain.CurrentDomain.BaseDirectory + "sendi2.txt");
         string G = "";
         string S = "";
         while ((G = T.ReadLine()) != null)
@@ -397,7 +397,7 @@ internal class MyForm : Form
     // button2 event
     private void btn2_Click(object sender, EventArgs e)
     {
-        TextReader T = new StreamReader("C:\\Users\\משתמש\\source\\repos\\WindowsFormsApp10\\WindowsFormsApp10\\sendi2.txt");
+        TextReader T = new StreamReader(AppDomain.CurrentDomain.BaseDirectory + "sendi2.txt");
         int num = int.Parse(T.ReadLine());
         string s = "";
         int min = num;
@@ -408,13 +408,14 @@ internal class MyForm : Form
                 min = int.Parse(s);
             }
         }
+        T.Close();
         MessageBox.Show("the minimum price is : " + min);
     }
 
     // button3 event
     private void btn3_Click(object sender, EventArgs e)
     {
-        TextReader T = new StreamReader("C:\\Users\\משתמש\\source\\repos\\WindowsFormsApp10\\WindowsFormsApp10\\sendi2.txt");
+        TextReader T = new StreamReader(AppDomain.CurrentDomain.BaseDirectory + "sendi2.txt");
         string G = "";
         int max = 0;
         while ((G = T.ReadLine()) != null)
@@ -424,13 +425,14 @@ internal class MyForm : Form
                 max = int.Parse(G);
             }
         }
+        T.Close();
         MessageBox.Show("The maxmimum price is : " + max);
     }
 
     // button4 event
     private void btn4_Click(object sender, EventArgs e)
     {
-        TextReader T = new StreamReader("C:\\Users\\משתמש\\source\\repos\\WindowsFormsApp10\\WindowsFormsApp10\\sendi2.txt");
+        TextReader T = new StreamReader(AppDomain.CurrentDomain.BaseDirectory + "sendi2.txt");
         int sum = 0;
         string H = "";
         double avg = 0;
@@ -438,7 +440,7 @@ internal class MyForm : Form
         {
             sum += int.Parse(H);
         }
-        avg = (double)sum / NumOfLines("C:\\Users\\משתמש\\source\\repos\\WindowsFormsApp10\\WindowsFormsApp10\\sendi2.txt");
+        avg = (double)sum / NumOfLines(AppDomain.CurrentDomain.BaseDirectory + "sendi2.txt");
         T.Close();
         MessageBox.Show("The average price is " + avg.ToString());
     }
@@ -446,15 +448,16 @@ internal class MyForm : Form
     public int NumOfLines(string path)
     {
         int c = 0;
-        TextReader tr = new StreamReader(path);
-        string s = tr.ReadLine();
-        while (s != null)
+        using (TextReader tr = new StreamReader(path))
         {
-            c++;
-            s = tr.ReadLine();
+            string s = tr.ReadLine();
+            while (s != null)
+            {
+                c++;
+                s = tr.ReadLine();
+            }
+            return c;
         }
-        tr.Close();
-        return c;
     }
 
     private void btn5_Click(object sender, EventArgs e)
@@ -466,69 +469,103 @@ internal class MyForm : Form
     private void btn8_Click(object sender, EventArgs e)
     {
         int i = 0;
-        TextReader T = new StreamReader("C:\\Users\\משתמש\\source\\repos\\WindowsFormsApp10\\WindowsFormsApp10\\workers.txt");
-        string s = T.ReadLine();
-        while (s != null)
+        using (TextReader T = new StreamReader(AppDomain.CurrentDomain.BaseDirectory + "workers.txt"))
         {
-            MessageBox.Show("sbhjdsd");
-            s = T.ReadLine();
-            workers[i] = s;
-            i++;
+            string s = T.ReadLine();
+            workers.Clear();
+            while (s != null)
+            {
+                s = T.ReadLine();
+                workers.Add(s);
+                i++;
+            }
+
+            string name = "";
+            btn9 = new Button();
+            Form MoreItems = new Form();
+            MoreItems.StartPosition = FormStartPosition.CenterScreen;
+            MoreItems.ClientSize = new Size(500, 500); //form size
+            MoreItems.BackColor = Color.FromArgb(255, 215, 0);//form color
+            MoreItems.FormBorderStyle = FormBorderStyle.Fixed3D;
+            MoreItems.Show();
+            var bitmap = WindowsFormsApp10.Properties.Resources.employees.GetHbitmap();
+            MoreItems.BackgroundImage = Image.FromHbitmap(bitmap);
+
+            //button
+            btn = new CircularButton();
+            btn.Size = new Size(300, 300);
+            btn.Location = new Point(10, 10);
+            btn.Font = new Font("Cooper Black", 10F, FontStyle.Italic | FontStyle.Italic, GraphicsUnit.Point, (byte)0);
+            btn.Text = "Close";
+            btn.BackColor = Color.IndianRed;
+            btn.ForeColor = Color.White;
+            btn.FlatStyle = FlatStyle.Flat;
+            btn.FlatAppearance.BorderColor = Color.BurlyWood;
+            btn.FlatAppearance.BorderSize = 0;
+            MoreItems.Controls.Add(btn9);
+            btn9.Click += new EventHandler(btn9_Click);
+            btn9.Text = "Remove";
+            //label
+            lb = new Label();
+            lb.AutoSize = true;
+            lb.Font = new Font("Cooper Black", 11F, FontStyle.Italic, GraphicsUnit.Point, (byte)0);
+            lb.Location = new Point(50, 200); //label location
+            lb.Text = "Enter the worker name you want to delete";
+            lb.ForeColor = Color.HotPink;
+            MoreItems.Controls.Add(lb);
+
+            //textbox
+            tbox = new TextBox();
+            tbox.Location = new Point(50, 350); //textbox location
+            tbox.Size = new Size(50, 20); //textbox size
+            tbox.TabIndex = 0;
+            tbox.ClientSize = new Size(200, 261);
+            tbox.BackColor = SystemColors.GradientActiveCaption;
+            tbox.ForeColor = Color.Black; //font color
+            Font myfont = new Font("Arial", 14.0f); //font size
+            tbox.Font = myfont;
+            tbox.RightToLeft = RightToLeft.No;
+            tbox.BorderStyle = BorderStyle.FixedSingle;
+            MoreItems.Controls.Add(tbox);
         }
-
-        string name = "";
-        btn9 = new Button();
-        Form MoreItems = new Form();
-        MoreItems.StartPosition = FormStartPosition.CenterScreen;
-        MoreItems.ClientSize = new Size(500, 500); //form size
-        MoreItems.BackColor = Color.FromArgb(255, 215, 0);//form color
-        MoreItems.FormBorderStyle = FormBorderStyle.Fixed3D;
-        MoreItems.Show();
-        var bitmap = WindowsFormsApp10.Properties.Resources.employees.GetHbitmap();
-        MoreItems.BackgroundImage = Image.FromHbitmap(bitmap);
-
-        //button
-        btn = new CircularButton();
-        btn.Size = new Size(300, 300);
-        btn.Location = new Point(10, 10);
-        btn.Font = new Font("Cooper Black", 10F, FontStyle.Italic | FontStyle.Italic, GraphicsUnit.Point, (byte)0);
-        btn.Text = "Close";
-        btn.BackColor = Color.IndianRed;
-        btn.ForeColor = Color.White;
-        btn.FlatStyle = FlatStyle.Flat;
-        btn.FlatAppearance.BorderColor = Color.BurlyWood;
-        btn.FlatAppearance.BorderSize = 0;
-        MoreItems.Controls.Add(btn9);
-        btn9.Click += new EventHandler(btn9_Click);
-
-        //label
-        lb = new Label();
-        lb.AutoSize = true;
-        lb.Font = new Font("Cooper Black", 11F, FontStyle.Italic, GraphicsUnit.Point, (byte)0);
-        lb.Location = new Point(50, 200); //label location
-        lb.Text = "Enter the worker name you want to delete";
-        lb.ForeColor = Color.HotPink;
-        MoreItems.Controls.Add(lb);
-
-        //textbox
-        tbox = new TextBox();
-        tbox.Location = new Point(50, 350); //textbox location
-        tbox.Size = new Size(50, 20); //textbox size
-        tbox.TabIndex = 0;
-        tbox.ClientSize = new Size(200, 261);
-        tbox.BackColor = SystemColors.GradientActiveCaption;
-        tbox.ForeColor = Color.Black; //font color
-        Font myfont = new Font("Arial", 14.0f); //font size
-        tbox.Font = myfont;
-        tbox.RightToLeft = RightToLeft.No;
-        tbox.BorderStyle = BorderStyle.FixedSingle;
-        MoreItems.Controls.Add(tbox);
     }
 
     private void btn9_Click(object sender, EventArgs e)
     {
         string name = tbox.Text.ToString();
-        workers.RemoveAt(workers.IndexOf(name));
+        string workerNameAndAge = "";
+        foreach (string NameAndAge in workers)
+        {
+            string[] words = NameAndAge.Split('-');
+            string searchNameAndSpace = words[0];
+            string nameWithNoSpace = searchNameAndSpace.Remove(searchNameAndSpace.Length - 1);
+            // remove the space in the end of the name and check if it the name
+            if (nameWithNoSpace == name)
+            {
+                workerNameAndAge = NameAndAge;
+                break;
+            }
+        }
+        // if find
+        if (workerNameAndAge != "")
+        {
+            MessageBox.Show(name + " we remove you as a empliyes in sendi's company!");
+
+            workers.RemoveAt(workers.IndexOf(workerNameAndAge));
+
+            string path = AppDomain.CurrentDomain.BaseDirectory + "workers.txt";
+
+            using (StreamWriter sw = File.CreateText(path))
+            {
+                foreach (var item in workers)
+                {
+                    sw.WriteLine(item);
+                }
+            }
+        }
+
+        //tw.WriteLine(tbox.Text); //taarih
+        //tw.Close();
     }
 
     private void btn6_Click(object sender, EventArgs e)
@@ -556,6 +593,7 @@ internal class MyForm : Form
         btn.FlatAppearance.BorderSize = 0;
         MoreItems.Controls.Add(btn7);
         btn7.Click += new EventHandler(btn7_Click);
+        btn7.Text = "Add";
         //label
         lb = new Label();
         lb.AutoSize = true;
@@ -593,7 +631,7 @@ internal class MyForm : Form
     //check if the new worker is liglle
     private void btn7_Click(object sender, EventArgs e)
     {
-        string path = "C:\\Users\\משתמש\\source\\repos\\WindowsFormsApp10\\WindowsFormsApp10\\workers.txt";
+        string path = AppDomain.CurrentDomain.BaseDirectory + "workers.txt";
         string name = tbox.Text.ToString();
         string[] words = name.Split('-');
 
