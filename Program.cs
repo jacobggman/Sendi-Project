@@ -1,13 +1,13 @@
 ﻿using System; //EventHandler
 using System.Windows.Forms; //Form
 using System.Drawing; //Point
-using System.Drawing.Drawing2D; //CircularButton 
+using System.Drawing.Drawing2D; //CircularButton
 using System.Text; //Encoding
 using System.IO;
 using System.Media;
 using System.Collections.Generic;
 
-class CircularButton : Button
+internal class CircularButton : Button
 {
     protected override void OnPaint(PaintEventArgs pevent)
     {
@@ -15,11 +15,10 @@ class CircularButton : Button
         gp.AddEllipse(0, 0, ClientSize.Width, ClientSize.Height);
         this.Region = new System.Drawing.Region(gp);
         base.OnPaint(pevent);
-
     }
 }
 
-class MyForm : Form
+internal class MyForm : Form
 {
     private Button windInstruments;
     private Button percussions;
@@ -27,11 +26,12 @@ class MyForm : Form
     private Button btnIdShow1;
     private MainMenu menu;
     private Button btnClose;
-    private Button btn, btn2, btn3, btn4, btn5,btn8,btn7,btn9;
+    private Button btn, btn2, btn3, btn4, btn5, btn8, btn7, btn9;
     private Label lb;
     private TextBox tbox;
     private PictureBox pb;
     private List<string> workers = new List<string>();
+
     public MyForm()
     {
         int i = 0;
@@ -41,8 +41,6 @@ class MyForm : Form
         ClientSize = new Size(640, 600); //form size
         BackColor = Color.FromArgb(127, 250, 212);//form color
         FormBorderStyle = FormBorderStyle.Fixed3D;
-
-    
 
         btnClose = new Button();
         btnClose.Size = new Size(50, 50);
@@ -153,13 +151,13 @@ class MyForm : Form
         pb.SizeMode = PictureBoxSizeMode.Zoom;
         tooltip.SetToolTip(this.pb, "");
         Controls.Add(this.pb);
-        
+
         this.menu = new MainMenu();
         MenuItem m1 = new MenuItem("our people");
         MenuItem m2 = new MenuItem("stores");
         MenuItem m3 = new MenuItem("collections");
         MenuItem m4 = new MenuItem("about us");
-       
+
         this.menu.MenuItems.Add(m1);
         this.menu.MenuItems.Add(m2);
         this.menu.MenuItems.Add(m3);
@@ -171,7 +169,7 @@ class MyForm : Form
         m1.MenuItems.Add(i2);
         MenuItem i3 = new MenuItem("Staff details");
         m1.MenuItems.Add(i3);
-        
+
         i1.Click += Workers;
         i2.Click += Managers;
         i3.Click += StaffDetails;
@@ -179,8 +177,8 @@ class MyForm : Form
         m3.Click += MoreItems;
         m4.Click += aboutUs;
         Menu = menu;
-
     }
+
     private void Workers(object sender, EventArgs e)
     {
         TextReader tr = new StreamReader("C:\\Users\\משתמש\\source\\repos\\WindowsFormsApp10\\WindowsFormsApp10\\workers.txt");
@@ -193,6 +191,7 @@ class MyForm : Form
         tr.Close();
         MessageBox.Show(abc);
     }
+
     // Managers
     private void Managers(object sender, EventArgs e)
     {
@@ -281,6 +280,7 @@ class MyForm : Form
             MessageBox.Show(abc);
         }
     }
+
     //our stores
     private void ourStores(object sender, EventArgs e)
     {
@@ -290,8 +290,9 @@ class MyForm : Form
     //abous us
     private void aboutUs(object sender, EventArgs e8)
     {
-       MessageBox.Show("This musical instrument store was created out of a love for music.\n The Creator Sendi Shira Bernstein has set up this pop - up store at cheap prices for all music lovers.\n In this store you will find pianos, keyboards, guitars, drums, wind instruments and more.\n What are you waiting for ? Start buying! :) ");
+        MessageBox.Show("This musical instrument store was created out of a love for music.\n The Creator Sendi Shira Bernstein has set up this pop - up store at cheap prices for all music lovers.\n In this store you will find pianos, keyboards, guitars, drums, wind instruments and more.\n What are you waiting for ? Start buying! :) ");
     }
+
     //MoreItems
     private void MoreItems(object sender5, EventArgs e5)
     {
@@ -313,7 +314,6 @@ class MyForm : Form
         lb.ForeColor = Color.HotPink;
         MoreItems.Controls.Add(lb);
 
-        
         windInstruments = new Button();
         windInstruments.Size = new Size(200, 70);
         windInstruments.Location = new Point(150, 200);
@@ -364,12 +364,14 @@ class MyForm : Form
             tr.Close();
             MessageBox.Show(abc);
         }
-}
+    }
+
     //2. buttonClose event
     private void btnClose_Click(object sender, EventArgs e)
     {
         Close();
     }
+
     // button1 event
     private void btn_Click(object sender, EventArgs e)
     {
@@ -380,12 +382,12 @@ class MyForm : Form
         while ((G = T.ReadLine()) != null)
         {
             S += G + "-" + F.ReadLine() + "$" + "\n";
-
         }
         T.Close();
         F.Close();
         MessageBox.Show(S);
     }
+
     // button2 event
     private void btn2_Click(object sender, EventArgs e)
     {
@@ -397,13 +399,12 @@ class MyForm : Form
         {
             if (min > int.Parse(s))
             {
-
                 min = int.Parse(s);
             }
         }
         MessageBox.Show("the minimum price is : " + min);
-
     }
+
     // button3 event
     private void btn3_Click(object sender, EventArgs e)
     {
@@ -435,6 +436,7 @@ class MyForm : Form
         T.Close();
         MessageBox.Show("The average price is " + avg.ToString());
     }
+
     public int NumOfLines(string path)
     {
         int c = 0;
@@ -448,11 +450,13 @@ class MyForm : Form
         tr.Close();
         return c;
     }
+
     private void btn5_Click(object sender, EventArgs e)
     {
         SoundPlayer splayer = new SoundPlayer("C:\\Users\\משתמש\\source\\repos\\WindowsFormsApp10\\WindowsFormsApp10\\song.wav");
         splayer.Play();
     }
+
     private void btn8_Click(object sender, EventArgs e)
     {
         int i = 0;
@@ -465,7 +469,6 @@ class MyForm : Form
             workers[i] = s;
             i++;
         }
-        
 
         string name = "";
         btn9 = new Button();
@@ -490,7 +493,7 @@ class MyForm : Form
         btn.FlatAppearance.BorderSize = 0;
         MoreItems.Controls.Add(btn9);
         btn9.Click += new EventHandler(btn9_Click);
-        
+
         //label
         lb = new Label();
         lb.AutoSize = true;
@@ -500,7 +503,7 @@ class MyForm : Form
         lb.ForeColor = Color.HotPink;
         MoreItems.Controls.Add(lb);
 
-        //textbox 
+        //textbox
         tbox = new TextBox();
         tbox.Location = new Point(50, 350); //textbox location
         tbox.Size = new Size(50, 20); //textbox size
@@ -514,11 +517,13 @@ class MyForm : Form
         tbox.BorderStyle = BorderStyle.FixedSingle;
         MoreItems.Controls.Add(tbox);
     }
+
     private void btn9_Click(object sender, EventArgs e)
     {
-       string name = tbox.Text.ToString();
-       workers.RemoveAt(workers.IndexOf(name));
+        string name = tbox.Text.ToString();
+        workers.RemoveAt(workers.IndexOf(name));
     }
+
     private void btn6_Click(object sender, EventArgs e)
     {
         btn7 = new Button();
@@ -558,11 +563,11 @@ class MyForm : Form
         lb.Location = new Point(50, 200); //label location
         lb.Text = "Enter your name and age" +
             " (Example: sendi - 19)";
-        
+
         lb.ForeColor = Color.HotPink;
         MoreItems.Controls.Add(lb);
-        
-        //textbox 
+
+        //textbox
         tbox = new TextBox();
         tbox.Location = new Point(50, 350); //textbox location
         tbox.Size = new Size(50, 20); //textbox size
@@ -575,16 +580,15 @@ class MyForm : Form
         tbox.RightToLeft = RightToLeft.No;
         tbox.BorderStyle = BorderStyle.FixedSingle;
         MoreItems.Controls.Add(tbox);
-        
     }
-    
+
     //check if the new worker is liglle
     private void btn7_Click(object sender, EventArgs e)
     {
         string path = "C:\\Users\\משתמש\\source\\repos\\WindowsFormsApp10\\WindowsFormsApp10\\workers.txt";
         string name = tbox.Text.ToString();
         string[] words = name.Split('-');
-        
+
         //name in the [0] place and age in the [1] place
         int age = Int32.Parse(words[1]);
 
@@ -606,14 +610,12 @@ class MyForm : Form
         }
     }
 
-
     //4. main
     [STAThread]
-    static void Main()
+    private static void Main()
     {
         MyForm f = new MyForm();
         Application.EnableVisualStyles();
         Application.Run(f);
     }
-    
 }
